@@ -17,19 +17,19 @@ from django.shortcuts import render, redirect
 
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from .models import Profile, Profile_add
+from .models import Profile, Profile_add, Trip_plan, Trip_detail
 
 
 def main(request):
-    
-    profile=Profile_add.objects.all()
+    profile=Trip_plan.objects.all()    
     # profile=Profile.objects.get(id=1)
     return render(request,'index.html',{'profile':profile})
 
 def write(request):
-    profile=Profile_add.objects.all()
-    # profile=Profile.objects.get(id=1)
-    return render(request,'write.html',{'profile':profile})
+    profile=Trip_plan.objects.all()    
+    return render(request,'write.html',
+                  {'profile':profile}
+                  )
 
 def detail(request, list_id):
     profile=Profile_add.objects.get(id=list_id)
@@ -52,14 +52,15 @@ def upload(request):
     return render(request,'upload.html')
 
 def upload_create(request):
-    form=Profile_add() #폼은 모델을 불러온다.
-    form.title=request.POST['title'] #폼의 title에 POST로 받은 title을 넣는다.
-    form.content=request.POST['content'] #폼의 content에 POST로 받은 content를 넣는다.
-    form.person1=request.POST['person1']
-    form.person_phone1=request.POST['person_phone1']
-    form.address=request.POST['address']
+    form=Trip_plan() #폼은 모델을 불러온다.
+    form.stert_day=request.POST['stert_day']
+    form.location=request.POST['location']
+    form.memo=request.POST['memo']
     form.etc=request.POST['etc']
     try:
+        form.end_day=request.POST['end_day']
+        form.content=request.POST['content'] #폼의 content에 POST로 받은 content를 넣는다.    
+        form.details=request.POST['details']
         form.image=request.FILES['image']
     except: #이미지가 없어도 그냥 지나가도록-!
         pass
@@ -82,3 +83,5 @@ def upload_modify(request, list_id):
     return redirect('mylist:main') 
 
 ## python manage.py runserver 8080
+## python manage.py makemigrations mylist
+## python manage.py migrate

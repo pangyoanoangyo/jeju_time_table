@@ -1,35 +1,50 @@
 {% extends "layout/frame.html" %}
 
 {% block contents %}
+<h1>Title</h1>
 <div id="contain" class="container-fluid">
     <table class="table align-items-center">
         <thead>
           <tr>
-            <th>구분</th>
-            <th>이미지</th>
-            <th>내용</th>
-            <th id="hide_id">담당</th>
-            <th id="hide_id">연락처</th>
-            <th>주소</th>
-            <th>비고</th>
-            <!-- <th>수정</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>출발하는 날</td>
+            <td>{{ profile.stert_day}}</td>
+          </tr>
+          <tr>
+            <td>도착하는 날</td>
+            <td>{{ profile.end_day}}</td>
+          </tr>
+          <tr>
+            <td>기간</td>
+            <td>3박 4일</td>
+          </tr>
+        </tbody>
+        <!-- {{ file.image.url }}<br> -->
+    </table>
+<h1>일정표</h1>
+<div id="contain" class="container-fluid">
+    <table class="table align-items-center">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>출발지</th>
+            <th>도착지</th>
+            <th>숙박</th>
+            <th>메모</th>
+            <th>상세</th>
+
           </tr>
         </thead>
         <tbody>
         {% for file in profile %}
-          <tr  onclick="location.href=`{% url 'mylist:detail' file.id %}`">
-            <td>{{ file.title }}</td>
-            {% if file.image.url is not valid %}
-            <td><img src="{{ file.image.url }}" style="width: 50px;"></td>
-            {% else %}
-            <td>이미지 없음</td>
-            {% endif %}
-            <td >{{ file.content }}</td>
-            <td id="hide_id">{{ file.person1 }}</td>
-            <td id="hide_id">{{ file.person_phone1 }}</td>
-            <td>{{ file.address }}</td>
-            <td>{{ file.etc }}</td>
-            <!-- <td><a href="{% url 'mylist:modify' file.id %}" class="btn btn-outline-secondary btn-sm" style="font-size:0.5vw; ">수정</a></td> -->
+          <tr>
+            <td>{{ file.stert_day}}</td>
+            <td>{{ file.location}}</td>
+            <td>{{ file.memo}}</td>
+            <td>{{ file.etc}}</td>
           </tr>
     {% endfor %}
         </tbody>

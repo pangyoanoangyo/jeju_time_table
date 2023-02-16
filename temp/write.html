@@ -12,33 +12,25 @@
 
         {% csrf_token %} 
         <div class="input-group">
-          <div class="input-group-text">구     분</div>
-          <input class="form-control" placeholder="작성하세요" type="text" name="title" >
+          <div class="input-group-text">날     짜</div>
+          <input class="form-control" placeholder="작성하세요" type="date" name="stert_day">
         </div>
         <div class="input-group">
-          <div class="input-group-text"> 내     용 </div>
-          <input class="form-control" placeholder="작성하세요" type="text" name="content">
-        </div>
-        <div class="input-group">
-          <div class="input-group-text"> 담당자 </div>
-          <input class="form-control" placeholder="작성하세요" type="text" name="person1">
-        </div>
-        <div class="input-group">
-          <div class="input-group-text"> 연락처 </div>
-          <input class="form-control" placeholder="작성하세요" type="text" name="person_phone1">
-        </div>
-        <div class="input-group">
-          <div class="input-group-text"> 주     소 </div>
-          <input class="form-control" placeholder="작성하세요" type="text" name="address">
-        </div>
-        <div class="input-group">
-          <div class="input-group-text"> 기     타 </div>
-          <input class="form-control" placeholder="작성하세요" type="text" name="etc">
+          <div class="input-group-text"> 장     소 </div>
+          <input class="form-control" placeholder="작성하세요" type="text" name="location">
         </div>
         <div class="input-group">
           <div class="input-group-text"> 사진 업로드 </div>
           <div class="form-control"><input class="btn btn-outline-info btn-sm" type="file" name="image"></div>
         </div>
+        <div class="input-group">
+          <div class="input-group-text"> 메     모 </div>
+          <input class="form-control" placeholder="작성하세요" type="text" name="memo">
+        </div>
+          <div class="input-group-text">상     세 </div>
+          <input class="form-control" placeholder="작성하세요" type="text" name="etc">
+        </div>
+        
         <div class="input-group">
           <a href="{% url 'mylist:main' %}" class="btn btn-secondary" style="font-size:0.5vw; ">목록</a>
           <input class="btn btn-primary" type="submit" value="제출" style="font-size:0.5vw;">

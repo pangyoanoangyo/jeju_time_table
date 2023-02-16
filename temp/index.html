@@ -1,0 +1,105 @@
+{% extends "layout/frame.html" %}
+
+{% block contents %}
+<div id="contain" class="container-fluid">
+    <table class="table align-items-center">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>이미지</th>
+            <th>내용</th>
+            <th id="hide_id">담당</th>
+            <th id="hide_id">연락처</th>
+            <th>주소</th>
+            <th>비고</th>
+            <!-- <th>수정</th> -->
+          </tr>
+        </thead>
+        <tbody>
+        {% for file in profile %}
+          <tr  onclick="location.href=`{% url 'mylist:detail' file.id %}`">
+            <td>{{ file.title }}</td>
+            {% if file.image.url is not valid %}
+            <td><img src="{{ file.image.url }}" style="width: 50px;"></td>
+            {% else %}
+            <td>이미지 없음</td>
+            {% endif %}
+            <td >{{ file.content }}</td>
+            <td id="hide_id">{{ file.person1 }}</td>
+            <td id="hide_id">{{ file.person_phone1 }}</td>
+            <td>{{ file.address }}</td>
+            <td>{{ file.etc }}</td>
+            <!-- <td><a href="{% url 'mylist:modify' file.id %}" class="btn btn-outline-secondary btn-sm" style="font-size:0.5vw; ">수정</a></td> -->
+          </tr>
+    {% endfor %}
+        </tbody>
+        <!-- {{ file.image.url }}<br> -->
+    </table>
+    <a href="{% url 'mylist:write' %}" class="btn btn-primary"  style="font-size:0.5vw;">신규 작성</a>
+</div>
+<script>
+  //document.addEventListener('click', function(e) {
+    /* if (e.target.id === 'hide_id') {
+      e.target.style.display = 'none';
+    } else {
+      e.target.style.display = 'block';
+    } */
+    //window.location.href = '/modify'+e.target.id;
+    //window.location.href = "{% url 'mylist:modify' 1 %}";
+    
+
+
+    function delete_confirm(){
+        if(confirm("정말 삭제하시겠습니까?")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
+<style>
+    form {
+        width: 300px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+
+    }
+    table {
+        width: 100%;
+    }
+    th{
+      font-size: 10px;
+      text-align: center;
+      border-bottom: 0.2px solid grey;
+    }
+    td {
+      font-size: 10px;
+      padding: 5px;
+      text-align: left;
+      justify-items: center;
+      align-items: center;
+      border-bottom: 0.2px solid grey;
+      cursor: pointer;
+    }
+    tr:hover {
+      background-color: rgb(16, 201, 255);
+      color: white;
+    }
+
+    @media screen and (min-width: 1000px){
+      #contain{
+        width: 90%;
+      }
+    }
+
+    @media screen and (max-width: 430px){
+      #hide_id{
+        display: none;
+      }
+    }
+</style>
+
+
+
+{% endblock %}
